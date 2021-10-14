@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route } from "react-router-dom";
+import { BrowserRouter,Route } from "react-router-dom";
 import "./App.css";
 import Loading from "./components/Loading";
 import Navbar from "./components/Navbar";
