@@ -5,20 +5,14 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 
 function Navbar() {
     const [click, setclick] = useState(false);
-    const [button, setbutton] = useState(true);
+    
 
     const handleClick = () => setclick(!click);
     const closeMenu = () => setclick(false);
 
-    const showbutton = () =>{
-        if(window.innerWidth <= 960){
-            setbutton(false);
-        } else {
-            setbutton(true)
-        }
-    };
+   
 
-    window.addEventListener('resize', showbutton);
+    
 
   return (
     <>
