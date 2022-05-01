@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default function cart() {
+const reportScreen = () => {
   return (
     <div>
       
     </div>
   );
 }
+
+export default reportScreen;
