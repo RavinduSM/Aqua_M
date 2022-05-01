@@ -7,7 +7,11 @@ import { isAuth, isFarmer } from '../utils.js';
 const productRouter = express.Router();
 
 productRouter.get('/', expressAsyncHandler(async (req,res) => {
-    const products = await Product.find({});
+    const name = req.query.name || '';
+    const nameFilter = name? {name: {$regex: name, $options: 'i'}} : {};
+    const farmer = req.query.farmer || '';
+    const farmerFilter = farmer ? { farmer } : {};
+    const products = await Product.find({...farmerFilter, ...nameFilter}).populate('farmer', 'farmer.name');    
     res.send(products);
     })
 );
@@ -30,7 +34,7 @@ productRouter.get('/myProducts',
     })
 )
 
-productRouter.post('/addProduct', isAuth, isFarmer,
+productRouter.post('/', isAuth, isFarmer,
 expressAsyncHandler(async(req,res) =>{
     const product = new Product({
         name: req.body.name,
@@ -39,13 +43,30 @@ expressAsyncHandler(async(req,res) =>{
         countInStock: req.body.countInStock,
         size: req.body.size,
         des: req.body.des,
-        image: req.body.image,        
+        image: req.body.image,  
+        farmer: req.user._id,      
+    })
+    const creatProduct = await product.save();
+    res.send({ message:"product created", product: creatProduct});
+}) )
+
+productRouter.post('/addProduct', isAuth, isFarmer,
+expressAsyncHandler(async(req,res) =>{
+    const product = new Product({
+        name:"Zebra green",
+        category: "nfjnf",
+        price: 566,
+        countInStock: 5000,
+        farmer: req.user._id,    
+        size: 5,
+        des:"description",
+        image: "images/v1.jpg",            
     })
     const createProduct = await product.save();
     res.send({ message:"product created", product: createProduct});
 }) )
 
-productRouter.post('/:id', isAuth, isFarmer,
+productRouter.put('/:id', isAuth, isFarmer,
 expressAsyncHandler(async(req, res) =>{
     const productId = req.params.id;
     const product = await Product.findById(productId);

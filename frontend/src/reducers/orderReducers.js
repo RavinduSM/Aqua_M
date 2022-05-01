@@ -1,4 +1,4 @@
-import { PRODUCT_ORDER_FAIL, PRODUCT_ORDER_REQUEST, PRODUCT_ORDER_SUCCESS } from "../constants/orderConstants"
+import { PRODUCT_ORDER_FAIL, PRODUCT_ORDER_REQUEST, PRODUCT_ORDER_RESET, PRODUCT_ORDER_SUCCESS } from "../constants/orderConstants"
 
 export const productOrderReducer = (state ={}, action) =>{
     switch(action.type) {
@@ -8,6 +8,8 @@ export const productOrderReducer = (state ={}, action) =>{
             return{laoding: false, success: true, order: action.payload};
         case PRODUCT_ORDER_FAIL:
             return{loading: false, error: action.payload};
+        case PRODUCT_ORDER_RESET:
+            return {};
         default:
             return state;
     }

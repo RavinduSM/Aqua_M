@@ -21,12 +21,12 @@ userRouter.post('/signin', expressAsyncHandler(async (req,res) =>{
                 _id: user._id,
                 name: user.name,
                 email: user.email,
-                address: req.body.address,
-                telephone: req.body.telephone,
+                address: user.address,
+                telephone: user.telephone,
                 isAdmin: user.isAdmin,
-                isExporter: req.body.isExporter,
-                isFarmer: req.body.isFarmer,
-                image: req.body.image,
+                isExporter:user.isExporter,
+                isFarmer:user.isFarmer,
+                image: user.image,
                 token: generateToken(user),
             });
             return;
@@ -64,7 +64,7 @@ userRouter.post('/register',
     })    
 );
 
-userRouter.post('/updateProfile', isAuth,
+userRouter.put('/updateProfile', isAuth,
     expressAsyncHandler(async (req,res) =>{
         const user = await User.findById(req.user._id);
         if(user){
@@ -74,7 +74,7 @@ userRouter.post('/updateProfile', isAuth,
             user.telephone = req.body.telephone || user.telephone;
             // user.isExporter = req.body.isExporter || user.isExporter;
             // user.isFarmer = req.body.isFarmer || user.isFarmer;
-            // user.image = req.body.image || user.image;
+            user.image = req.body.image || user.image;
         }       
         const updateUser = await user.save();
         res.send({
@@ -86,7 +86,7 @@ userRouter.post('/updateProfile', isAuth,
             isAdmin: updateUser.isAdmin,
             // isExporter: updateUser.isExporter,
             // isFarmer: updateUser.isFarmer,
-            // image: updateUser.image,
+            image: updateUser.image,
             token: generateToken(updateUser),
         });
     })    

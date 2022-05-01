@@ -85,6 +85,9 @@ function Navbar() {
                       <ul className='dropdown-link'>
                         <Link to='#signout' onClick={signoutHandler}>Signout</Link>
                       </ul>
+                      <ul className='dropdown-link'>
+                        <Link to='/dashboard' onClick={signoutHandler}>Profile</Link>
+                      </ul>
                       
                   </div>                 
                 ) : (

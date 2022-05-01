@@ -1,10 +1,12 @@
 import React from 'react';
 import pic from '../images/e.jpg';
 
+
 export default function HomeScreen() {
   return (
     
         <div className="container">
+
           <div className="row mt-5">
             <div className="col-12 col-lg-6 mb-4 mb-lg-0">
               <img src={pic} className="img-fluid" />          

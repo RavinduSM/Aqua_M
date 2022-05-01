@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
+import Axios from 'axios'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsMine, updateUser } from '../actions/userActions';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
 import { USER_PROFILEUPDATE_RESET } from '../constants/userConstants';
-
 
 export default function MyProfileScreen() {
   const [name, setName] = useState('');
@@ -16,12 +16,35 @@ export default function MyProfileScreen() {
   const [isFarmer, setIsFarmer] = useState(false);
   const [isExporter, setIsExporter] = useState(false);
 
+  const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+
   const userSignin = useSelector((state) => state.userSignin);
   const { userData } = userSignin;
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   const userUpdate = useSelector((state) => state.userUpdate);
   const {success: successUpdate, error: errorUpdate, loading: loadingUpdate,} = userUpdate;
+
+  const uploadHandler = async (e) =>{
+    const imgFile = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('image', imgFile);
+    setUploadLoading(true);
+    try{
+      const {data} = await Axios.post('/api/uploads', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+      setImage(data);
+      setUploadLoading(false);
+    } catch (error) {
+      setUploadError(error.message);
+      setUploadLoading(false);
+    }
+  }
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -106,8 +129,19 @@ export default function MyProfileScreen() {
                 type="text"
                 placeholder="Insert Image"
                 value={image}
-                onChange={(e)=> setTelephone(e.target.value)} />
+                onChange={(e)=> setImage(e.target.value)} />
                 <label for="floatingInput">Image</label>
+            </div>
+            <div className="form-floating m-3 ">
+              <div class="input-group">
+                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" 
+                aria-label="Upload" onChange={uploadHandler}/>
+                {/* <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button> */}
+                {uploadLoading && <Loading/>}
+                {uploadError && ( 
+                  <Message>{uploadError}</Message>
+                  )}
+              </div>        
             </div>
             <div>
               <label />

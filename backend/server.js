@@ -1,4 +1,5 @@
 import express, { application } from "express";
+import path from 'path';
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import productRouter from "./routers/productRouter.js";
@@ -6,6 +7,7 @@ import userRouter from "./routers/userRouter.js";
 import orderRouter from "./routers/orderRouter.js";
 import tankRouter from "./routers/tankRouter.js";
 import messageRouter from "./routers/messageRouter.js";
+import uploadRouter from "./routers/uploadRouter.js";
 
 dotenv.config();
 
@@ -24,6 +26,10 @@ app.use('/api/products', productRouter);
 app.use('/api/tanks', tankRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/messages', messageRouter);
+app.use('/api/uploads', uploadRouter);
+
+const __dirname = path.resolve();
+app.use('/profileImgUploads', express.static(path.join(__dirname, '/profileImgUploads')));
 
 app.get('/', (req,res) => {
     res.send('server is ready');

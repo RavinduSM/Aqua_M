@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function OrderScreen() {
+export default function OrderListScreen() {
   return (
     <div className='container'>
 

@@ -9,7 +9,7 @@ export const generateToken = (user) =>{
         // telephone: req.body.telephone,
         isAdmin: user.isAdmin,
         // isExporter: user.isExporter,
-        // isFarmer: iser.isFarmer,
+        isFarmer: user.isFarmer,
         // image: req.body.image,
     }, process.env.JWT_SECRET || 'secret', //benefit of having alternative is u wont get errors not havin JWT in env folder
     {
@@ -54,3 +54,11 @@ export const isAuth = (req, res, next) => {
       res.status(401).send({ message: 'Invalid Farmer Token' });
     }
   };
+
+  export const isUser = (req,res,next) => {
+    if (req.user && (req.user.isFarmer || req.user.isExporter)){
+      next();
+    } else {
+      res.status(401).send({message: 'Invalid User Tolken'});
+    }
+  }

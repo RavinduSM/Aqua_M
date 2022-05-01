@@ -12,10 +12,11 @@ export const createOrder = (order) => async (dispatch, getState) =>{
                 Authorization: `Bearer ${userData.token}`,
             },
         });
-        dispatch({type: PRODUCT_ORDER_SUCCESS, payload: data.order});
+        dispatch({type: PRODUCT_ORDER_SUCCESS, payload: data});
     } catch (error){
         dispatch({
-            type: PRODUCT_ORDER_FAIL, payload: error.response && error.response.data.message
+            type: PRODUCT_ORDER_FAIL, 
+            payload: error.response && error.response.data.message
             ? error.response.data.message
             : error.message,
         })

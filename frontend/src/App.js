@@ -16,9 +16,13 @@ import ProductDisplayScreen from "./Screens/ProductDisplayScreen";
 import InsertProductScreen from "./Screens/InsertProductScreen";
 import FarmerList from "./Screens/FarmerList";
 import Dashboard from "./Dashboard";
-import OrderScreen from "./Screens/OrderScreen";
+import OrderScreen from "./Screens/OrderListScreen";
 import MyProfileScreen from "./Screens/MyProfileScreen";
 import UserRoute from "./components/UserRoute";
+import FarmerRoute from "./components/FarmerRoute";
+import ProductEditScreen from "./Screens/ProductEditScreen";
+import SearchScreen from "./Screens/SearchScreen";
+import SearchBox from "./components/SearchBox";
 
 function App() {
 
@@ -26,12 +30,22 @@ function App() {
     <BrowserRouter> 
     <div className="grid-container">
      <header>
-      <Navbar/>
+      <Navbar></Navbar>
      </header>
      <main>      
+     {/* <div>
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+              )}
+            ></Route>
+          </div> */}
       <Route path="/orderScreen" component={OrderScreen}/>
       <UserRoute path="/profile" component={MyProfileScreen}/>
-      {/* <Route path='/dashboard' component={Dashboard}/> */}
+      <FarmerRoute path="/productlist/farmer" component={ProductDisplayScreen}></FarmerRoute>
+      <Route path="/search/name/:search?" component={SearchScreen} exact></Route>
+      <Route path='/dashboard' component={Dashboard}/>
+      <Route path="/product/:id/edit" component={ProductEditScreen} exact ></Route>
       <Route path='/calculator' component={Calculator} />
       <Route path="/profile" component={Profile} />
       <Route path='/contact' component={Contact} />
@@ -39,8 +53,7 @@ function App() {
       <Route path="/farmers/:id" component={Profile}/>
       <Route path="/register" component={RegisterScreen} />
       <Route path="/signin" component={SignIn} />
-      <Route path="/load" component={Loading} /> 
-      <Route path = "/productDisplayScreen" component={ProductDisplayScreen} />
+      <Route path="/load" component={Loading} />      
       <Route path="/insertProduct" component={InsertProductScreen} />
       <Route path="/product" component={ProductScreen} />
       <Route path="/farmers" component={FarmerList}/>
