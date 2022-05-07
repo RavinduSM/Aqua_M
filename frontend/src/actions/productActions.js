@@ -29,11 +29,11 @@ export const detailsProduct = (productId) => async (dispatch) => {
     }
   };
 
-  export const createproduct = (name, category, price, countInStock, size, des, image, farmer) => async (dispatch,getState) => {
-    dispatch({ type: CREATE_PRODUCT_REQUEST, payload: {name, category, price, countInStock, size, des, image, farmer} });
+  export const createproduct = (name, category, price, countInStock, size, des, image) => async (dispatch,getState) => {
+    dispatch({ type: CREATE_PRODUCT_REQUEST, payload: {name, category, price, countInStock, size, des, image} });
     const { userSignin: { userData }} = getState();
     try{
-        const {data} = await Axios.post('/api/products', {name, category, price, countInStock, size, des, image, farmer}, 
+        const {data} = await Axios.post('/api/products', {name, category, price, countInStock, size, des, image}, 
         {
           headers: { Authorization: `Bearer ${userData.token}` },
         }

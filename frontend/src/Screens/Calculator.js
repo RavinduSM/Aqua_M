@@ -12,7 +12,7 @@ export default function Calculator() {
    function calculation() {
     
        
-     if(fishLength>6){
+     if(fishLength>12){
         setFishCal(Math.floor((length1 * length2)/ (fishLength * 50)));
      } else{
         setFishCal(Math.floor((length1 * length2)/(fishLength * 30)));

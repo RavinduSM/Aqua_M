@@ -13,31 +13,38 @@ import pic from '../images/a.jpg';
 
 export default function ProductScreen(props) {
   const productId = props.match.params.id;
-  const productDetails = useSelector((state) => state.productDetails);
+  const productDetails = useSelector((state) => state.productDetails); 
+  const [qty, setQty] = useState(1);  
+  const [requiredDate, setRequiredDate] = useState();
+  const [farmer, setFarmer] = useState();
+  const [itemName, setItemName] = useState('');
+  const [price, setPrice] = useState(''); 
+ 
   const { loading, error, product } = productDetails;
-  const {qty, setQty} = useState(1);
-  const {date, setDate} = useState();
+
   const orderCreate = useSelector((state)=> state.orderDetails);
   const{ loading: loadingOrderCreate, error: errorOrderCreate, success: successOrderCreate, order} = orderCreate;
   
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userData } = userSignin;
+  // const userSignin = useSelector((state) => state.userSignin);
+  // const { userData } = userSignin;  
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {  
-    if(successOrderCreate){
-      dispatch({type: CREATE_PRODUCT_RESET});
-    }  
+    // if(successOrderCreate){
+    //   dispatch({type: CREATE_PRODUCT_RESET});
+    // }  
     dispatch(detailsProduct(productId));
-  }, [dispatch, productId,order, successOrderCreate ]);
+  }, [dispatch, productId, ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createOrder({farmer: product.farmer, name: product.name,user: userData._Id,  price: product.price,  Id: product._Id, }))
+    dispatch(createOrder({farmer: product.farmer, itemName: product.name, qty, unitPrice: product.price, requiredDate  } ))
   }
 
   return (
-    <div>     
+    <div className='container'>     
       {loading ? (
         <Loading></Loading>
       ) : error ? (
@@ -46,28 +53,42 @@ export default function ProductScreen(props) {
         <div>
           <Link to="/">Back to result</Link>
           <div className="row top">
-           <div className="col-12 col-sm-6 col-md-4">
-             <img src={product.image} className="img-fluid" alt={product.name} />
+           <div className="col-sm-6  ">
+
+             <img src={pic} className="img-fluid" alt={product.name} />
            </div>
-           <div className="col-sm-6">
-             <h1>{product.name}</h1>
-             <p className='card-text'>{product.category}</p>
+           <div className="col-sm-6  ">
+             <h1 className='text-success'>{product.name}</h1>
+             {/* <p className='card-text'>{product.category}</p>
              <p className='card-text'>{product.size}</p>
-             <p className='card-text'>{product.seller}</p>
+             <p className='card-text'>{product.seller}</p> */}
+             <div className="row">
+              <div className="col-3">
+                  <p className='fs-5'>Category</p>
+                  <p className='fs-5'>Size</p>
+                  <p className='fs-5'>Seller</p>
+                </div>
+                <div className="col-3">
+                  <p className='fs-5'>{product.category}</p>
+                  <p className='fs-5'>{product.size}</p>
+                  <p className='fs-5'>{product.seller}</p>
+                </div>
+               </div>
            </div>
            <form className='form' onSubmit={submitHandler}>
-           <div className="col">
-             <div className="card">
+           <div className="col-sm-6 ">
+             <div className="card border border-success">
                <div className="card-body">
-                <p className='card-text'>Farmer: {product.farmer}</p>
+                <p className='card-text'>Price: {product.price}</p>
                 <p className='card-text'>Stock: {product.countInStock}</p>
                 <div>
-                {/* <input type="Number"  id="qty"    value={qty}
-                              onChange={(e) => setQty(e.target.value)}
-                            /> */}
+                <input type="qty" className="form-control" 
+                required onChange={(e) => setQty(e.target.value)} />
                 </div>
                 <div>
-                   <input type='date' value='rdate' onChange={setDate}/>
+                   {/* <input type='date' value='rdate' onChange={setRequiredDate}/> */}
+                   <input type="date" className="form-control"  name="input1" placeholder="YYYY-MM-DD" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="Enter a date in this formart YYYY-MM-DD"
+                   onChange ={(e) => setRequiredDate(e.targetValue)}/>
                 </div>
                 <button type="submit" className='primary'>
                   Request Order

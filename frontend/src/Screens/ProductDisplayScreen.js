@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {  createproduct, deleteproduct, listProducts } from '../actions/productActions';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
@@ -11,8 +12,8 @@ export default function ProductDisplayScreen(props) {
     const productList = useSelector((state) => state.productList);
     const {loading, error, products } = productList;
 
-    const productCreate = useSelector((state) => state.productCreate);
-    const { loading: ldingCreate, error: errorCreate, success: successCreate, product: createProduct, } = productCreate;
+    // const productCreate = useSelector((state) => state.productCreate);
+    // const { loading: ldingCreate, error: errorCreate, success: successCreate, product: createProduct, } = productCreate;
 
     const productDelete = useSelector((state) => state.productDelete);
     const { loading: ldingDelete, error: errorDelete, success: successDelete, product: deleteProduct, } = productDelete;
@@ -24,15 +25,15 @@ export default function ProductDisplayScreen(props) {
 
 
     useEffect(() => { 
-    if (successCreate) {
-        dispatch({ type: CREATE_PRODUCT_RESET});   
-        props.history.push(`/product/${createProduct._id}/edit`);     
-    }
+    // if (successCreate) {
+    //     dispatch({ type: CREATE_PRODUCT_RESET});   
+    //     props.history.push(`/product/${createProduct._id}/edit`);     
+    // }
     if (successDelete) {
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
     dispatch(listProducts({ farmer: farmerMode ? userData._id : '' }));
-      }, [ createProduct, dispatch, props.history, farmerMode, successCreate, successDelete, userData._id,
+      }, [dispatch, props.history, farmerMode, successDelete, userData._id,
       ]);
 
     const deleteHandler = (product) => {
@@ -46,13 +47,13 @@ export default function ProductDisplayScreen(props) {
 
   return (
       <div className="container">
-          <button type="button" className="primary" onClick={createHandler}>
-          Create Product
+          <button type="button" className="primary" >
+         <Link to='/insertProduct' > Create Product</Link>
         </button>
       {ldingDelete && <Loading></Loading>}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
-      {ldingCreate && <Loading></Loading>}
-      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
+      {/* {ldingCreate && <Loading></Loading>}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>} */}
       {loading ? (
         <Loading></Loading>
       ) : error ? (

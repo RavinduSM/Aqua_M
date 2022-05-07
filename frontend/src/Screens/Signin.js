@@ -34,23 +34,28 @@ function SignIn(props) {
   }, [props.history, redirect, userData]);
 
   return (
-    <div className="row g-0">
-      <div className="col-sm-6">
-        <h1>Hello Signin</h1>
-      </div>
-      <div className="col-sm-6">
-        <h1> Login </h1>
+
+    <div className="container">
+    <div class="container-fluid ps-md-0">
+        <div class="row g-0">
+          <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+          <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-9 col-lg-8 mx-auto">
+                    <h3 class="login-heading mb-4">Welcome back!</h3>
         <div>
           {loading && <Loading/>}
           {error && <Message variant="danger">{error}</Message>}
         </div>
         <form onSubmit={submitHandler}>
-          <div className="form-floating m-3 ">
+        <div class="form-floating mb-3">
             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" 
               required onChange={(e) => setEmail(e.target.value)}/>
             <label for="floatingInput">Email address</label>
           </div>
-          <div className="form-floating m-3">
+          <div className="form-floating mb-3">
             <input type="password" className="form-control" id="floatingInput" placeholder="Password"
               required onChange={(e) => setPassword(e.target.value)} />
             <label for="floatingInput">Password</label>
@@ -63,8 +68,14 @@ function SignIn(props) {
             New Customer? <Link to='/register'> Create an account </Link>
           </div>
         </form>
-      </div>
-    </div>   
+       </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>   
   );
 }
 

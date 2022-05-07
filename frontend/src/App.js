@@ -1,8 +1,8 @@
-import { BrowserRouter,Route } from "react-router-dom";
+import { BrowserRouter,Link,Route } from "react-router-dom";
 //import "./App.css";
 //import Sidebar from './sidebar';
 import Loading from "./components/Loading";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import HomeScreen from "./Screens/HomeScreen";
 import ProductDetailScreen from "./Screens/ProductDetailScreen";
 import SignIn from "./Screens/Signin";
@@ -23,6 +23,8 @@ import FarmerRoute from "./components/FarmerRoute";
 import ProductEditScreen from "./Screens/ProductEditScreen";
 import SearchScreen from "./Screens/SearchScreen";
 import SearchBox from "./components/SearchBox";
+import chartScreen from "./Screens/ChartScreen";
+import Navbar from "./components/Navbar";
 
 function App() {
 
@@ -30,9 +32,10 @@ function App() {
     <BrowserRouter> 
     <div className="grid-container">
      <header>
-      <Navbar></Navbar>
+     {/* <Navbar/>  */}
      </header>
-     <main>      
+     <main>    
+     
      {/* <div>
             <Route
               render={({ history }) => (
@@ -40,6 +43,8 @@ function App() {
               )}
             ></Route>
           </div> */}
+     
+    
       <Route path="/orderScreen" component={OrderScreen}/>
       <UserRoute path="/profile" component={MyProfileScreen}/>
       <FarmerRoute path="/productlist/farmer" component={ProductDisplayScreen}></FarmerRoute>
@@ -57,8 +62,9 @@ function App() {
       <Route path="/insertProduct" component={InsertProductScreen} />
       <Route path="/product" component={ProductScreen} />
       <Route path="/farmers" component={FarmerList}/>
+      <Route path="/chart" component={chartScreen}/>
       <Route path="/" component={HomeScreen} exact />  
-      
+
      </main>
      <footer className="row center">
     

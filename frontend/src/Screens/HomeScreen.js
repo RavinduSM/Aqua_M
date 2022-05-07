@@ -16,9 +16,9 @@ export default function HomeScreen() {
                 About Us
               </h2>
               <p>
-                Ravindu_M is a digital platform that allows ornamental fish farmers to advertise their products online and will help to attract exporters.
-                The integrated supply and demanding forecsting system will help farmers to decission based on the predictions and will notify it the system sees 
-                any overbreeding of a specific species in the future.
+                Aqua_M is a digital platform that allows ornamental fish farmers to advertise their products online and thereby opening gateways to cope with
+                exporters directly. The integrated supply and demand forecasting system will help farmers to identify their farming fish species are at a risk
+                of overbreeding and help them to make decissions to prevent overbreeding of a specific species in the future.
               </p>
             </div>
           </div>
@@ -33,9 +33,7 @@ export default function HomeScreen() {
             <li>
               To stop overbreeding of fish species.
             </li>
-            <li>
-              T
-            </li>
+            
           </ul>
         </div>
       

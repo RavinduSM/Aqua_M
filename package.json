@@ -1,14 +1,15 @@
 {
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^5.1.1",
+    "bootstrap": "^5.1.3",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.11",
     "multer": "^1.4.4",
-    "react-bootstrap": "^2.0.0-rc.0"
+    "react-bootstrap": "^2.3.1"
   },
   "name": "m_aqua",
   "type": "module",

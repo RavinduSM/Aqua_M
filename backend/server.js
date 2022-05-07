@@ -29,11 +29,20 @@ app.use('/api/messages', messageRouter);
 app.use('/api/uploads', uploadRouter);
 
 const __dirname = path.resolve();
-app.use('/profileImgUploads', express.static(path.join(__dirname, '/profileImgUploads')));
+app.use('/profileImgUploads', express.static(path.join(__dirname, '/uploads')));
 
 app.get('/', (req,res) => {
     res.send('server is ready');
 });
+
+app.get('/fishPredictions', function (req,res){
+    var spawn = require('child_process').spawn;
+    var process = spawn('python', ['.finalTest.py', req.query.fishName]);
+    process.stdout.on('data', function(data) {
+        res.send(data.toString());
+    });
+})
+
 
 //error catcher
 app.use((err, req, res, next) =>{
@@ -43,4 +52,5 @@ app.use((err, req, res, next) =>{
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Serve at http://localhost:${port}`);
+    console.log(`Try Getting Aggregated fishData data at http://localhost:${port}/fishPredictions?fishName='Zaebra'`);
 });

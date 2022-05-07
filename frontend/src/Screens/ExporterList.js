@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listUsers } from '../actions/userActions';
 
 
-export default function FarmerList() {
+export default function ExporterList() {
   const dispatch = useDispatch();
  const userList = useSelector((state) => state.userList);
  const {loading, error, users} = userList;
@@ -24,7 +24,7 @@ export default function FarmerList() {
         <div className="row">
           {
               users
-              .filter( (user) => user.isFarmer === true)
+              .filter( (user) => user.isExporter === true)
               .map((user) => (
                 <Users key={user._id} user={user}/>
               ))

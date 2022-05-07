@@ -5,11 +5,11 @@ const uploadRouter = express.Router();
 //storage engine
 const storeProfile = multer.diskStorage({
     destination(req, file, cb){
-        cb(null, 'profileImgUploads/');
+        cb(null, 'uploads/');
     },
     filename(req, file, cb){
         cb(null, `${Date.now()}.jpg`)
-    }
+    },
 })
 
 const upload = multer({ storeProfile });

@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema(
         //totPrice: {type: Number, required: true},       
         user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
         // orderDate: {type: Date},
-        // requestDate: {type: Date},
+        // requiredDate: {type: Date},
     },
     {
         timestamps:true,

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { register } from '../actions/userActions';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
+import pic from '../images/register.jpg';
 
 
 function RegisterScreen(props) {
@@ -51,15 +52,25 @@ function RegisterScreen(props) {
   }, [props.history, redirect, userData]);
 
   return ( 
+    <div className="container">
+          <div class="container-fluid ps-md-0">
+              <div class="row g-0">
+                <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image">
+                {/* <img src={pic} className="img-fluid" />    */}
+                </div>
+                <div class="col-md-8 col-lg-6">
+                  <div class="login d-flex align-items-center py-5">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                          <h3 class="login-heading mb-4">Welcome!</h3>
         
         <form onSubmit={submitHandler}>
-          <div className="row g-0">
           <div>
             {loading && <Loading/>}
             {error && <Message variant="danger">{error}</Message>}
           </div>
-          <div className="col-sm-6">
-            <div className="form-floating m-3 ">
+           <div className="form-floating m-3 ">
               <input type="text" className="form-control" id="floatingInput" placeholder="name" 
                 required onChange={(e) => setName(e.target.value)}/>
               <label htmlFor="floatingInput">Name</label>
@@ -79,18 +90,9 @@ function RegisterScreen(props) {
                 required onChange={(e) => setConfirmPassword(e.target.value)} />
               <label htmlFor="floatingInput">Confirm Password</label>
             </div>
-            
-            <div className="float-right">
-              <button type="submit"  className="btn btn-primary" > Register </button>
-            </div>
-            <div> 
-              Have an account? <Link to='/signin'> Create an account </Link>
-            </div>
-          </div>
+      
 
-
-            <div className="col-sm-6">
-              <div className="form-floating m-3">
+             <div className="form-floating m-3">
                 <input type="text" className="form-control" id="floatingInput" placeholder="address"
                   required onChange={(e) => setAddress(e.target.value)} />
                 <label htmlFor="floatingInput">Address</label>
@@ -101,11 +103,24 @@ function RegisterScreen(props) {
               <label htmlFor="floatingInput">Telephone</label>
             </div>
             <input type="radio" onClick={buttonHandler} id="isFarmerbtn"/> Farmer
-            <input type="radio" onClick={buttonexport} id="isExporterbtn"/> Farmer
+            <input type="radio" onClick={buttonexport} id="isExporterbtn"/> Exporter
+            
+            <div className="float-right">
+              <button type="submit"  className="btn btn-primary" > Register </button>
             </div>
-          </div>
-        </form>
-    
+            <div> 
+              Have an account? <Link to='/signin'> Have an account </Link>
+            </div>
+
+          </form>
+        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
      
   );
 }

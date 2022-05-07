@@ -16,7 +16,7 @@ export default function Contact() {
         dispatch(addMessage(name, email, tele, msg));
     }
   return (
-    <div>
+    <div className='container'>
         <div>
             <div className="card md-mx-auto md-mw-75">
                 <div className='row g-0'>

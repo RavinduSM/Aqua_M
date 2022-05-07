@@ -39,7 +39,7 @@ function Navbar() {
           <div className='navbar-container container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
               <MdAccountCircle className='navbar-icon' />
-              Ravindu_M
+              Aqua_M
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
@@ -76,17 +76,25 @@ function Navbar() {
                   <Link to="/signin">Sign In</Link>
                 )}
               </li> */}
-              <li className='nav-item'>
-                {userData? (
+            
+                {/* {userData? (
                   <div className="dropdown">
-                     <Link to="#"  className='nav-links' onClick={closeMobileMenu}>{userData.name}
-                      <i className='fa fa-caret-down'></i>
-                      </Link>
+                    <button class="dropbtn">{userData.name}
+                      <i class="fa fa-caret-down"></i>
+                    </button>        
+                    <div className="dropdown-content">
+                      <li>
+                      <Link to='/dashboard'>Profile</Link>
+                      </li>
+                    
+                    <Link to="'#signout" onClick={signoutHandler}>Signout</Link>
+                    
+                    </div>            
                       <ul className='dropdown-link'>
                         <Link to='#signout' onClick={signoutHandler}>Signout</Link>
                       </ul>
                       <ul className='dropdown-link'>
-                        <Link to='/dashboard' onClick={signoutHandler}>Profile</Link>
+                        <Link to='/dashboard'>Profile</Link>
                       </ul>
                       
                   </div>                 
@@ -98,9 +106,9 @@ function Navbar() {
                     >
                       Signin
                   </Link>
-                )}
+                )} */}
                
-              </li>
+             
             </ul>
           </div>
         </nav>

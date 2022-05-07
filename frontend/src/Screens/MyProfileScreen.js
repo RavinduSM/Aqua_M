@@ -65,8 +65,11 @@ export default function MyProfileScreen() {
     e.preventDefault();
     dispatch(updateUser({userId: user._id, name, email, address, telephone, image}));
   };
+
+
+  
   return (
-    <div>
+    <div className='container'>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>User Profile</h1>
