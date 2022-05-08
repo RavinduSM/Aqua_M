@@ -14,7 +14,7 @@ messageRouter.post('/', expressAsyncHandler (async(req, res) =>{
     const createMessage = await msgr.save();
     res
     .status(201)
-    .send({message: 'Message send', msgr: createMessage});
+    .send({message: "Message send", msgr: createMessage});
 }))
 
 export default messageRouter;

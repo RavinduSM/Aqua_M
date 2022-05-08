@@ -44,7 +44,7 @@ export const productDetailsReducer = (
       case CREATE_PRODUCT_REQUEST:
         return { loading: true };
       case CREATE_PRODUCT_SUCCESS:
-        return { loading: false,  productss: action.payload };
+        return { loading: false, success: true, productss: action.payload };
       case CREATE_PRODUCT_FAIL:
         return { loading: false, error: action.payload };
       case CREATE_PRODUCT_RESET:

@@ -25,7 +25,7 @@ export default function ProductEditScreen(props){
 
     useEffect(()=>{
         if(sUpdate){
-            props.history.push('/productList');
+            props.history.push('productlist/farmer');
         }
         if (!product || product._id !== productId|| sUpdate) {
             dispatch({type: UPDATE_PRODUCT_RESET});
@@ -58,7 +58,7 @@ export default function ProductEditScreen(props){
     }
 
   return (
-    <div>
+    <div className='container'>
         <form className='form' onSubmit={submitHandler}>
             <h1>Edit </h1>
             {lUpdate && <Loading></Loading>}

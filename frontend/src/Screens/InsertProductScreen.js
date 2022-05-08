@@ -5,7 +5,7 @@ import { createproduct } from '../actions/productActions';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
 
-export default function InsertProductScreen() {
+export default function InsertProductScreen(props) {
  
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
@@ -19,7 +19,7 @@ export default function InsertProductScreen() {
   // const { userData } = userSignin;
 
   const productCreate = useSelector((state) => state.productCreate);
-  const {productss, loading, error} = productCreate;
+  const {success, loading, error} = productCreate;
 
   const dispatch = useDispatch();
 
@@ -28,6 +28,11 @@ export default function InsertProductScreen() {
     e.preventDefault();
     dispatch(createproduct(name, category, price, countInStock, size, des, image))
   }
+  useEffect(() =>{
+    if(success){
+        alert("Product Inserted");
+    }
+  }, [dispatch, success]);
 
 
   return (

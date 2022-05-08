@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addMessage } from '../actions/messageActions';
+import Loading from '../components/Loading';
+import Message from '../components/Message';
+import { MESSAGE_SEND_REQUEST, MESSAGE_SEND_REST, MESSAGE_SEND_SUCCESS } from '../constants/messageConstants';
 
 export default function Contact() {
     const[name, setName]=useState('');
@@ -8,6 +13,8 @@ export default function Contact() {
     const[tele, setTele] = useState('');
     const[msg, setMsg] = useState('');
 
+    const messageSend = useSelector((state) => state.messageSend);
+    const {success, loading, error} = messageSend;
    
     const dispatch = useDispatch();
 
@@ -15,6 +22,13 @@ export default function Contact() {
         e.preventDefault();
         dispatch(addMessage(name, email, tele, msg));
     }
+
+    useEffect(() =>{
+        if(success){
+            dispatch({type: MESSAGE_SEND_REST});
+            alert("Msg Sent")
+        }
+      }, [dispatch, success]);
   return (
     <div className='container'>
         <div>
@@ -29,6 +43,11 @@ export default function Contact() {
                 </div>
                 <div className="col-md-6">
                     <form onSubmit={submitHandler}>
+                    <div>
+                        {loading && <Loading/>}
+                        {error && <Message variant="danger">{error}</Message>}
+                        {success && <Message variant="success">{success}</Message>}
+                    </div>
                         
                         <div className='form-floating m-3'>
                             <input type="text" className='form-control' id='floatingInputValue' placeholder='name'

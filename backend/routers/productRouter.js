@@ -50,21 +50,21 @@ expressAsyncHandler(async(req,res) =>{
     res.send({ message:"product created", product: creatProduct});
 }) )
 
-productRouter.post('/addProduct', isAuth, isFarmer,
-expressAsyncHandler(async(req,res) =>{
-    const product = new Product({
-        name:"Zebra green",
-        category: "nfjnf",
-        price: 566,
-        countInStock: 5000,
-        farmer: req.user._id,    
-        size: 5,
-        des:"description",
-        image: "images/v1.jpg",            
-    })
-    const createProduct = await product.save();
-    res.send({ message:"product created", product: createProduct});
-}) )
+// productRouter.post('/addProduct', isAuth, isFarmer,
+// expressAsyncHandler(async(req,res) =>{
+//     const product = new Product({
+//         name:"Zebra green",
+//         category: "nfjnf",
+//         price: 566,
+//         countInStock: 5000,
+//         farmer: req.user._id,    
+//         size: 5,
+//         des:"description",
+//         image: "images/v1.jpg",            
+//     })
+//     const createProduct = await product.save();
+//     res.send({ message:"product created", product: createProduct});
+// }) )
 
 productRouter.put('/:id', isAuth, isFarmer,
 expressAsyncHandler(async(req, res) =>{
@@ -77,7 +77,7 @@ expressAsyncHandler(async(req, res) =>{
         product.countInStock = req.body.countInStock;
         product.size = req.body.size;
         product.des = req.body.des;
-        product.image = rea.body.image;
+        product.image = req.body.image;
         const updateProduct = await product.save();
         res.send({ message: 'Product Updated', product: updateProduct });
     } else {
