@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const tankSchema = new mongoose.Schema(
     {
-        length1 : {type: Number, required: true},
-        length2 : {type: Number, required: true},
-        fishName : { type: String, required: true},
-        fishLength : {type: Number, requires: true},
-        fishCal : {type : Number, required: true},    
+        length1 : {type: String, required: true},
+        length2 : {type: String, required: true},
+        fishName : { type: String, required: false},
+        fishLength : {type: String, requires: true},
+        fishCal : {type : String, required: false},    
         farmer: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
     },
     {

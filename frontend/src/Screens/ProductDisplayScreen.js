@@ -47,9 +47,11 @@ export default function ProductDisplayScreen(props) {
 
   return (
       <div className="container">
-          <button type="button" className="primary" >
+        <div className='d-flex flex-row-reverse'>
+          <button type="button" className="btn btn-outline-success" >
          <Link to='/insertProduct' > Create Product</Link>
         </button>
+        </div>
       {ldingDelete && <Loading></Loading>}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {/* {ldingCreate && <Loading></Loading>}
@@ -59,10 +61,10 @@ export default function ProductDisplayScreen(props) {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-         <table className="table table-info table-striped ">
-                <thead>
+         <table className="table ">
+                <thead className='table-dark'>
                     <tr>
-                        <th scope="col">ID</th>
+                       
                         <th scope="col"> Fish Species </th>
                         <th scope="col"> Size </th>
                         <th scope="col"> Quantity </th>
@@ -74,14 +76,13 @@ export default function ProductDisplayScreen(props) {
                     {products.map((product) =>(
                     <tr key = {product._id}>
                         <td>{product.name}</td>
-                        <td>{product.size}</td>
+                        <td>{product.size} cm</td>
                         <td>{product.countInStock}</td>
-                        <td>{product.price}</td>
-                        <td>actions</td>
+                        <td>Rs: {product.price}</td>
                         <td>
                         <div className="d-grid d-flex ">
-                            <button type="button" onClick={() => props.history.push(`/product/${product._id}/edit`) }> Edit </button>
-                            <button type="button" onClick={() => deleteHandler(product)}>  Delete </button>
+                            <button type="button"  className="btn btn-outline-primary" onClick={() => props.history.push(`/product/${product._id}/edit`) }> Edit </button>
+                            <button type="button" className="btn btn-outline-danger" onClick={() => deleteHandler(product)}>  Delete </button>
                         </div> 
                         </td>
                     </tr>

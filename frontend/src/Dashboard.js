@@ -20,14 +20,11 @@ import SignIn from "./Screens/Signin";
 import Loading from "./components/Loading";
 import InsertProductScreen from "./Screens/InsertProductScreen";
 import ProductScreen from "./Screens/ProductScreen";
+import test from "./Screens/test";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
 import SearchScreen from "./Screens/SearchScreen";
 import SearchBox from "./components/SearchBox";
-import chartScreen from "./Screens/ChartScreen";
 import ExporterList from "./Screens/ExporterList";
 import ChartScreen from "./Screens/ChartScreen";
 import MyProfileScreen from "./Screens/MyProfileScreen";
@@ -65,6 +62,7 @@ export default function Dashboard(){
                     <Route path="/insertProduct" component={InsertProductScreen} />
                     <Route path="/product" component={ProductScreen} />
                     <Route path="/chart" component={ChartScreen}/>
+                    <Route path="/test" component={test}/>
                      {/* <Route path="/" component={Profile} />  */}
                     <Route path="/" component={HomeScreen} exact />  
                 </Switch>

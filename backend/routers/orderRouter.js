@@ -25,6 +25,14 @@ orderRouter.post(
 )
 
 orderRouter.get(
+    '/myOrders',isAuth,
+    expressAsyncHandler(async (req, res) => {
+        const orders = await Order.find({ user: req.user._id});
+        res.send(orders);
+     })
+)
+
+orderRouter.get(
     '/', isAuth, isFarmer,
     expressAsyncHandler(async(req,res) =>{
         const farmer = req.query.farmer || '';

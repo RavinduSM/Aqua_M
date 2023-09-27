@@ -4,6 +4,7 @@ import {
     TANK_LIST_SUCCESS,
     TANK_Register_FAIL,
     TANK_Register_REQUEST,
+    TANK_REGISTER_RESET,
     TANK_Register_SUCCESS
 } from "../constants/tankConstants";
 
@@ -25,9 +26,11 @@ export const tankRegisterReducer = (state = {}, action) => {
         case TANK_Register_REQUEST:
             return {loading: true};
         case TANK_Register_SUCCESS:
-            return {loading: false, tankData: action.payload};
+            return {loading: false,success: true, tankData: action.payload};
         case TANK_Register_FAIL:
             return {loading: false, error: action.payload};
+        case TANK_REGISTER_RESET:
+            return {};
         default:
             return state;
     }

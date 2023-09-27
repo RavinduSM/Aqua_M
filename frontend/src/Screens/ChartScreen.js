@@ -1,73 +1,39 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from "axios"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, Legend, AreaChart } from 'recharts';
 
-const data = [
-  {
-    name: 'January',
-    Angel: 4000
-  },
-  {
-    name: "February",
-    Angel: 1000,
-  },
-  {
-    name: "March",
-    Angel: 3000,
-  },
-  {
-    name: "April",
-    Angel: 2000,
-  },
-  {
-    name: "May",
-    Angel: 2500,
-  },
-  {
-    name: "June",
-    Angel: 1000,
-  },
-  {
-    name: "July",
-    Angel: 800,
-  },
-  {
-    name: "August",
-    Angel: 1000,
-  },
-  {
-    name: "September",
-    Angel: 1500,
-  },
-  {
-    name: "October",
-    Angel: 1800,
-  },
-  {
-    name: "November",
-    Angel: 1500,
-  },
-  {
-    name: "December",
-    Angel: 2500,
-  }
-];
 
-const baseURL = "http://localhost:3000/fishPredictions?fishName=Tetra";
+
+
 
 export default function ChartScreen() {
-  const [fishSpecies, setFishSpecies] = useState([])
+  const[data, setData] = useState([]);
+  const[fishspecies, setFishSpecies] = useState('');
+
   
-  React.useEffect(() => {
-   axios.get(baseURL).then((response) => {
-     setFishSpecies(response.data);
-   });
-  }, []);
- 
+
+    useEffect(() => {
+      const fetchApi = async() =>
+       {
+        fetch("http://localhost:4000/fishPredictions?fishName=Angel")
+        .then((res) => res.json())
+        .then((json) => setData(json))
+        .then((j) => console.log(j))
+       }
+       fetchApi();
+    }, [fishspecies])
+  
   return (
     <div className='container'>
-    <h1>{fishSpecies.name}</h1>
+    
     <h2>Predictions</h2>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary" onClick={() => setFishSpecies('Angel')}>Angel</button>
+      <button type="button" class="btn btn-primary" onClick={() => setFishSpecies('Guppy')}>Guppy</button>
+      <button type="button" class="btn btn-primary" onClick={() => setFishSpecies('Molly')}>Molly</button>
+      <button type="button" class="btn btn-primary" onClick={() => setFishSpecies('Platy')}>Platy</button>
+    </div>
+    
     <ResponsiveContainer width="90%" aspect={3}>
     <LineChart
       width={500}
@@ -80,14 +46,17 @@ export default function ChartScreen() {
         bottom: 5,
       }}
     >
-      <CartesianGrid  horizontal="true" vertical="" stroke="#243240"/>
-      <XAxis dataKey="name" tick={{fill:"#fff"}}/>
+      {/* <CartesianGrid  horizontal="true" vertical="" stroke="#243240"/> */}
+      <XAxis dataKey="Date" />
       <YAxis tick={{fill:"#fff"}} />
-      <Tooltip contentStyle={{ backgroundColor: "#8884d8", color: "#fff" }} itemStyle={{ color: "#fff" }} cursor={false}/>
-      <Line type="monotone" dataKey="Angel" stroke="#8884d8" strokeWidth="5" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:5}} activeDot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 5,r:10}} />
-      
+      <Tooltip  cursor={false}/>
+      <Legend />
+      <Line type="monotone" dataKey="PredictedDemand" stroke="#0095FF" strokeWidth="2" dot={{fill:"#0095FF",stroke:"#0095FF",strokeWidth: 2,r:3}}  />
+      <Line type="monotone" dataKey="PredictedSupply" stroke="#FF0000" strokeWidth="2" dot={{fill:"#2e4355",stroke:"#8884d8",strokeWidth: 2,r:3}}  />
     </LineChart>
-  </ResponsiveContainer>
-</div>
+  </ResponsiveContainer> 
   )
+    
+    </div>
+)
 }

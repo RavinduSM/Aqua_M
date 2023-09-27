@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { tankRegister } from '../actions/tanksActions';
+import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 export default function Calculator() {
-   const [length1, setLength1] = useState(0);
-   const [length2, setLength2] = useState(0);
-   const [fishLength, setFishLength] = useState(0);
+   const [length1, setLength1] = useState('');
+   const [length2, setLength2] = useState('');
+   const [fishLength, setFishLength] = useState('');
    const [fishName, setFishName] = useState('');
-   const [fishCal, setFishCal] = useState( 0);
+   const [fishCal, setFishCal] = useState( '');
+
+   const tankregister = useSelector((state)=> state.tankregister);
+   const {success, loading, error} = tankregister;
+
+   const dispatch = useDispatch();
+
+   const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(tankRegister(length1, length2, fishName, fishLength ));
+}
+    useEffect(() =>{
+        if(success){
+            alert("Tank added")
+        }
+    }, [dispatch, success]);
 
    function calculation() {
     
@@ -17,18 +34,18 @@ export default function Calculator() {
      } else{
         setFishCal(Math.floor((length1 * length2)/(fishLength * 30)));
        }       
-      }    
-      
-   
-      const dispatch = useDispatch();
+      }       
+    
 
-      const submitHandler = (e) => {
-          e.preventDefault();
-          dispatch(tankRegister(fishName));
-      }
+      
     
   return (
     <div className="container">
+        <div>
+            {loading && <Loading/>}
+            {error && <Message variant="danger">{error}</Message>}
+            {success && <Message variant="success">{success}</Message>}
+          </div>
        
     <div className='row-fluid'>
         <div className="card m-3">
@@ -40,7 +57,7 @@ export default function Calculator() {
                             type="number" className='form-control' 
                             id='length'  
                             value={length1}                          
-                            onChange = {(e) => setLength1(+e.target.value)} 
+                            onChange = {(e) => setLength1(e.target.value)} 
                             placeholder='length' 
                         />
                         <label htmlFor="length">Tank length in cm</label>
@@ -50,7 +67,7 @@ export default function Calculator() {
                             type="number" className='form-control' 
                             id='length'
                             value={length2}
-                            onChange = {(e) => setLength2(+e.target.value)} 
+                            onChange = {(e) => setLength2(e.target.value)} 
                             placeholder='length2' 
                         />
                         <label htmlFor="length2">Tank length in cm </label>
@@ -89,7 +106,7 @@ export default function Calculator() {
             </div>
             
         </div>
-      <table className="table table-info table-striped m-4">
+      {/* <table className="table table-info table-striped m-4">
         <thead>
             <tr>
                 <th scope="col"> Tank ID</th>
@@ -110,7 +127,7 @@ export default function Calculator() {
                 <td>actions</td>
             </tr>
         </tbody>
-      </table>
+      </table> */}
     </div>
     </div>
   );

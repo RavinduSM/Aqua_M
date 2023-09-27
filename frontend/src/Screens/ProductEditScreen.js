@@ -24,9 +24,9 @@ export default function ProductEditScreen(props){
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        if(sUpdate){
-            props.history.push('productlist/farmer');
-        }
+        // if(sUpdate){
+        //     props.history.push('productlist/farmer');
+        // }
         if (!product || product._id !== productId|| sUpdate) {
             dispatch({type: UPDATE_PRODUCT_RESET});
             dispatch(detailsProduct(productId));
@@ -129,7 +129,7 @@ export default function ProductEditScreen(props){
                     <label for="floatingInput">description</label> 
                 </div>
 
-                <div className="form-floating m-3">
+                {/* <div className="form-floating m-3">
                 <input className='form-control'
                     id="image"
                     type="text"
@@ -137,7 +137,16 @@ export default function ProductEditScreen(props){
                     value={image}
                     onChange={(e)=> setImage(e.target.value)} />
                     <label for="floatingInput">image</label> 
-                </div>
+                </div> */}
+
+<div className="form-floating m-3 ">            
+          <div class="input-group">
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" 
+            aria-label="Upload"  onChange={(e) => setImage(e.target.value)}/>
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+           </div>
+      
+          </div>
                 <div>              
                     <button className="primary" type="submit">
                         Update

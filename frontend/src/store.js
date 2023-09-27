@@ -22,7 +22,7 @@ const reducer = combineReducers({
     productDetails: productDetailsReducer,
     userSignin: userSigninReducer,
     userRegister: userRegisterReducer,
-    tankRegister: tankRegisterReducer,
+    tankregister: tankRegisterReducer,
     userList: userListReducer,
     orderDetails: productOrderReducer,
     userDetails: userDetailReducer,

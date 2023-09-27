@@ -48,8 +48,12 @@ export default function InsertProductScreen(props) {
             <label htmlFor="floatingInput">Name</label>
           </div>
           <div className="form-floating m-3 ">
-            <input type="text" className="form-control" id="floatingInput" placeholder="category" 
-              required onChange={(e) => setCategory(e.target.value)}/>
+            <select className="form-control" id="floatingInput" placeholder="category" 
+              required onChange={(e) => setCategory(e.target.value)}>
+                <option selected>Choose...</option>
+                <option value="1">Slender</option>
+                <option value="2">Full bodied</option>
+              </select>
             <label htmlFor="floatingInput">Category</label>
           </div>
           <div className="form-floating m-3 ">
@@ -72,7 +76,7 @@ export default function InsertProductScreen(props) {
               required onChange={(e) => setDes(e.target.value)}/>
             <label htmlFor="floatingInput">Description</label>
           </div>
-          <div className="form-floating m-3">
+          {/* <div className="form-floating m-3">
               <input className='form-control'
                 id="image"
                 type="text"
@@ -80,7 +84,7 @@ export default function InsertProductScreen(props) {
                 value={image}
                 onChange={(e)=> setImage(e.target.value)} />
                 <label for="floatingInput">Image</label>
-            </div>
+            </div> */}
           <div className="form-floating m-3 ">            
           <div class="input-group">
             <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" 

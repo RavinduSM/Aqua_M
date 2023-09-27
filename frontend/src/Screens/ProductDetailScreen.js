@@ -74,10 +74,7 @@ export default function ProductScreen(props) {
                   <p className='fs-5'>{product.seller}</p>
                 </div>
                </div>
-           </div>
-           <form className='form' onSubmit={submitHandler}>
-           <div className="col-sm-6 ">
-             <div className="card border border-success">
+			   <div className="card border border-success">
                <div className="card-body">
                 <p className='card-text'>Price: {product.price}</p>
                 <p className='card-text'>Stock: {product.countInStock}</p>
@@ -96,7 +93,11 @@ export default function ProductScreen(props) {
                 {loadingOrderCreate && <Loading></Loading>}
                 {errorOrderCreate && <Message variant="danger">{errorOrderCreate}</Message>}
                </div>
-             </div>             
+             </div>   
+           </div>
+           <form className='form' onSubmit={submitHandler}>
+           <div className="col-sm-6 ">
+                      
            </div>
            </form>
           </div>

@@ -20,10 +20,15 @@ export const listTanks = () => async(dispatch) => {
     }
 };
 
-export const tankRegister = (fishName) => async(dispatch) => {
-    dispatch({type: TANK_Register_REQUEST, payload: {fishName} });
+export const tankRegister = (length1, length2, fishName, fishLength, fishCal) => async(dispatch, getState) => {
+    dispatch({type: TANK_Register_REQUEST, payload: {length1, length2, fishName, fishLength, fishCal} });
+    const { userSignin: { userData }} = getState();
     try{
-        const {data} = await Axios.post('/api/tanks/register', { fishName});
+        const {data} = await Axios.post('/api/tanks/add', { length1, length2, fishName, fishLength, fishCal},
+        {
+            headers: { Authorization: `Bearer ${userData.token}` },
+          }
+        );
         dispatch ({type: TANK_Register_SUCCESS, payload: data});        
     } catch (error) {
         dispatch({
